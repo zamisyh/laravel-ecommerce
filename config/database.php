@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mongodb'),
 
     /*
     |--------------------------------------------------------------------------
@@ -61,6 +61,16 @@ return [
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
+        ],
+
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'host'     => env('MONGO_DB_HOST', 'localhost'),
+            'port'     => env('MONGO_DB_PORT', 27017),
+            'database' => env('MONGO_DB_DATABASE'),
+            'username' => env('MONGO_DB_USERNAME'),
+            'password' => env('MONGO_DB_PASSWORD'),
+            'options'  => []
         ],
 
         'pgsql' => [
@@ -115,8 +125,8 @@ return [
     | provides a richer body of commands than a typical key-value system
     | such as APC or Memcached. Laravel makes it easy to dig right in.
     |
-    */
 
+    */
     'redis' => [
 
         'client' => env('REDIS_CLIENT', 'phpredis'),

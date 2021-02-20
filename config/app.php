@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Jakarta',
 
     /*
     |--------------------------------------------------------------------------
@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Jenssegers\Mongodb\MongodbServiceProvider::class,
         /*
          * Application Service Providers...
          */

@@ -11,6 +11,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    protected $connection = 'mongodb';
     /**
      * The attributes that are mass assignable.
      *
