@@ -1,8 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\HomeController;
 use App\Http\Livewire\Admin\Home;
+use App\Http\Livewire\Auth\Login;
+use App\Models\User;
+use App\Http\Livewire\Admin\Category\Category;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +23,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', Home::class);
+Route::prefix('auth')->group(function () {
+    Route::get('login', Login::class)->name('login');
 });
+
+Route::prefix('admin')->group(function () {
+    Route::middleware(['auth'])->group(function () {
+        Route::name('admin.')->group(function() {
+            Route::get('/', Home::class)->name('home');
+            Route::get('category', Category::class)->name('category');
+        });
+    });
+});
+
 
 

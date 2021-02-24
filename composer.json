@@ -16,7 +16,8 @@
         "jenssegers/mongodb": "^3.8",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "livewire/livewire": "^2.3"
+        "livewire/livewire": "^2.3",
+        "realrashid/sweet-alert": "^3.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
