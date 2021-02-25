@@ -32,6 +32,7 @@ Route::prefix('admin')->group(function () {
         Route::name('admin.')->group(function() {
             Route::get('/', Home::class)->name('home');
             Route::get('category', Category::class)->name('category');
+            Route::get('category/{id}', Category::class)->name('category_edit');
         });
     });
 });

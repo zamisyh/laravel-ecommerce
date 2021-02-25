@@ -10,7 +10,11 @@
             </ol>
         </div>
 
-        <a href="{{ route('admin.category') }}">Category</a>
+        <div class="col-lg-12">
+            Home
+
+
+        </div>
 
    </div>
 </div>

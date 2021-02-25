@@ -44,7 +44,7 @@ class Login extends Component
 
                 $this->resetErrorBag();
                 $this->resetValidation();
-                $this->reset('');
+                $this->resetFields();
             }else{
                 session()->flash('errLog', 'Invalid Data!');
             }

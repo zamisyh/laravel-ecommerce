@@ -10,6 +10,8 @@
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/ruang-admin.min.css') }}" rel="stylesheet">
 
+    @yield('css')
+
 
     @livewireStyles
     @livewireScripts
@@ -46,5 +48,7 @@
     <script src="{{ asset('assets/js/ruang-admin.min.js') }}"></script>
     @include('sweetalert::alert')
     <script src="{{ mix('js/app.js') }}"></script>
+
+    @yield('js')
 </body>
 </html>
