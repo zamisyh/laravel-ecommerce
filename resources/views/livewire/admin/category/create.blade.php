@@ -15,7 +15,7 @@
     </div>
     <div class="form-group">
        @if($category_id)
-          <button wire:click="store" class="btn btn-primary">Update</button>
+          <button wire:click="update({{ $category_id }})" class="btn btn-primary">Update</button>
        @else
           <button wire:click="store" class="btn btn-success">Save</button>
        @endif

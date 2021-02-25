@@ -59,7 +59,7 @@
 
                             <table class="table table-bordered table-flush table-hover align-items-center" id="dataCategory">
                             <thead class="thead-light">
-                                {{ $category_id }}
+
                                 <tr>
                                     <th>#</th>
                                     <th>Category</th>

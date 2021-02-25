@@ -64,9 +64,6 @@ class Category extends Component
 
              session()->flash('successCreate', $this->category . ' Saved!');
 
-
-
-
              $this->closeFormCreate();
              $this->resetForm();
        } catch (Exception $e) {
@@ -87,13 +84,13 @@ class Category extends Component
     public function update($id)
     {
         $data = ModelCategory::where('id', $id)->first();
-        $data->category = $this->category();
-        $data->parent_id = $this->parent_id();
+        $data->category = $this->category;
+        $data->parent_id = $this->parent_id;
         $data->save();
 
         session()->flash('successUpdate', $this->category . ' Updated!');
         $this->closeFormCreate();
-        $this->resetForm();
+
 
     }
 
