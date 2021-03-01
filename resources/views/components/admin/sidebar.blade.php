@@ -6,7 +6,7 @@
     </a>
     <hr class="sidebar-divider my-0">
     <li class="nav-item active">
-      <a class="nav-link" href="{{ route('admin.home') }}" wire:click="$refresh">
+      <a class="nav-link" href="{{ route('admin.home') }}">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
     </li>
@@ -15,9 +15,15 @@
       Features
     </div>
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('admin.category') }}" wire:click="$refresh">
+      <a class="nav-link" href="{{ route('admin.category') }}">
         <i class="fab fa-fw fa-wpforms"></i>
         <span>Category</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('admin.product') }}">
+        <i class="fas fa-calendar"></i>
+        <span>Products</span>
       </a>
     </li>
 
