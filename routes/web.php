@@ -5,12 +5,14 @@ use App\Http\Livewire\Admin\Home;
 use App\Http\Livewire\Auth\Login;
 use App\Models\User;
 use App\Http\Livewire\Admin\Category\Category;
+use App\Http\Livewire\Admin\Product\ListProduct;
+use Illuminate\Support\Facades\Storage;
 
 
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Web Routesse
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -23,6 +25,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Route::prefix('auth')->group(function () {
     Route::get('login', Login::class)->name('login');
 });
@@ -32,7 +36,7 @@ Route::prefix('admin')->group(function () {
         Route::name('admin.')->group(function() {
             Route::get('/', Home::class)->name('home');
             Route::get('category', Category::class)->name('category');
-            Route::get('category/{id}', Category::class)->name('category_edit');
+            Route::get('product', ListProduct::class)->name('product');
         });
     });
 });
