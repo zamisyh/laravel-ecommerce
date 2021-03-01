@@ -5,20 +5,39 @@ namespace App\Http\Livewire\Admin\Category;
 use Livewire\Component;
 use App\Models\Category as ModelCategory;
 use Illuminate\Support\Str;
+use Livewire\WithPagination;
 
 
 class Category extends Component
 {
     // protected $queryString = [;]
 
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public $isFormCreate = 0;
     public $category, $parent_id;
     public $category_id;
 
+    public $search;
+    public $page = 1;
+
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'page' => ['except' => 1],
+    ];
+
 
     public function render()
     {
-        $data = ModelCategory::with(['parent'])->orderBy('created_at', 'DESC')->get();
+
+        $data = null;
+
+        if($this->search){
+            $data = ModelCategory::where('category', 'LIKE', '%' . $this->search . '%')->with(['parent'])->orderBy('created_at', 'DESC')->paginate(10);
+        }else{
+            $data = ModelCategory::with(['parent'])->orderBy('created_at', 'DESC')->paginate(10);
+        }
         $parent = ModelCategory::getParent()->orderBy('name', 'ASC')->get();
         return view('livewire.admin.category.category', compact('data', 'parent'))->extends('layouts.app')->section('content');
     }
