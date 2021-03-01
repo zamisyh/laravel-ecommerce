@@ -1,9 +1,6 @@
 <div>
     <div>
 
-        @section('css')
-            <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}">
-        @endsection
 
 
         @section('title', 'Category')
@@ -57,7 +54,13 @@
                                 </div>
                             @endif
 
-                            <table class="table table-bordered table-flush table-hover align-items-center" id="dataCategory">
+                            <table class="table table-bordered table-flush table-hover align-items-center">
+
+                            <div class="mb-4" style="max-width: 250px;">
+                               <input wire:model="search" type="text" name="search" class="form-control" placeholder="Search Category...">
+
+                               <span wire:loading wire:target='search'>Searching : {{ $search }}</span>
+                            </div>
                             <thead class="thead-light">
 
                                 <tr>
@@ -69,7 +72,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data as $item)
+                                @forelse ($data as $item)
                                     <tr>
 
                                         <td>{{ $loop->iteration }}</td>
@@ -81,10 +84,22 @@
                                             <button wire:click="edit({{ $item->id }})" class="btn btn-primary btn-sm ml-1"><i class="fas fa-edit"></i></button>
 
                                         </td>
+
+                                        @empty
+                                           <td colspan="2">{{ $search ? "Searching not found" : "data does not exist in the database" }}</td>
+
                                     </tr>
-                                @endforeach
+                                @endforelse
+
+
                             </tbody>
                         </table>
+
+                          <div class="mb-3 mt-5">
+                            {{ $data->links() }}
+                          </div>
+
+
                         @endif
                     </div>
                 </div>
@@ -93,17 +108,7 @@
 
         </div>
 
-        @section('js')
-              <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-              <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
-              <!-- Page level custom scripts -->
-              <script>
-                $(document).ready(function () {
-                  $('#dataCategory').DataTable(); // ID From dataTable with Hover
-                });
-              </script>
-        @endsection
 
      </div>
 
