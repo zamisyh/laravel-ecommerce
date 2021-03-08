@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Livewire\Admin\Product;
+
+use App\Imports\ProductImport;
 use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
@@ -8,6 +10,8 @@ use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\File;
+use App\Jobs\ProductJob;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class ListProduct extends Component
@@ -19,9 +23,10 @@ class ListProduct extends Component
 
     public $isFormCreate = 0;
     public $dataCategory;
-    public $name, $category, $description, $weight, $price, $image;
+    public $name, $category, $description, $weight, $price, $image, $status, $file_excel;
     public $search;
     public $product_id;
+    public $mass, $massOpenForm;
 
     public function render()
     {
@@ -44,10 +49,20 @@ class ListProduct extends Component
     //Show Create Form
     public function create()
     {
-
+        $this->mass = true;
         $this->dataCategory = Category::orderBy('created_at', 'DESC')->get();
         $this->openFormCreate();
     }
+
+    public function createMass()
+    {
+
+        $this->massOpenForm = true;
+        $this->dataCategory = Category::orderBy('created_at', 'DESC')->get();
+        $this->openFormCreate();
+
+    }
+
 
     public function store()
     {
@@ -91,6 +106,29 @@ class ListProduct extends Component
 
     }
 
+    public function storeMass()
+    {
+        $this->validate([
+            'category' => 'required',
+            'file_excel' => 'required|file|mimes:xlsx'
+        ]);
+
+        if($this->file_excel){
+            $file = $this->file_excel;
+            $filename = time() . '-product.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/uploads', $filename);
+
+            ProductJob::dispatch($this->category, $filename);
+
+        }
+
+        session()->flash('successUpload', 'Successfully upload file');
+        $this->massOpenForm = false;
+        $this->mass = false;
+        $this->closeFormCreate();
+
+    }
+
     public function resetForm()
     {
          $this->resetErrorBag();
@@ -117,6 +155,12 @@ class ListProduct extends Component
     {
 
         $this->validate([
+            'name' => 'required|max:100',
+            'category' => 'required',
+            'description' => 'required',
+            'weight' => 'required|numeric',
+            'price' => 'required|numeric',
+            'status' => 'required',
             'image' => 'required|file|image|mimes:jpeg,jpg,png'
         ]);
 
@@ -140,6 +184,7 @@ class ListProduct extends Component
         $product->weight = $this->weight;
         $product->price = $this->price;
         $product->image = $photo;
+        $product->status = $this->status;
 
         $product->save();
 

@@ -14,7 +14,11 @@
             <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Data Products</h6>
+                    @if ($mass)
+                        <button wire:click='createMass' class="btn btn-primary">Mass Upload Product</button>
+                    @else
                     <button wire:click='create' class="btn btn-primary">Create Product</button>
+                    @endif
 
                 </div>
 
@@ -46,6 +50,15 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                                 {{ session('successUpdate') }}
+                            </div>
+                        @endif
+
+                        @if (session()->has('successUpload'))
+                            <div class="alert alert-success alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                {{ session('successUpload') }}
                             </div>
                         @endif
 
@@ -85,7 +98,7 @@
                                             @if($item->status == 0)
                                                 <span class="badge badge-secondary">Draft</span>
                                             @else
-                                                '<span class="badge badge-success">Aktif</span>';
+                                                <span class="badge badge-success">Aktif</span>
                                             @endif
                                         </td>
                                         <td class="d-flex">

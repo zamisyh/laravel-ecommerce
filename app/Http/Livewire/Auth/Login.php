@@ -15,7 +15,7 @@ class Login extends Component
     public function render()
     {
         session()->has('successLogin') ? $this->alertSuccessLogin() : null;
-        return view('livewire.auth.login')->extends('layouts.client')->section('content');
+        return view('livewire.auth.login')->extends('layouts.auth')->section('content');
 
     }
 

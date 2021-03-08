@@ -1,4 +1,8 @@
 <div>
+    @if ($massOpenForm)
+      @include('livewire.admin.product.mass')
+    @else
+
     <div enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Name</label>
@@ -15,6 +19,17 @@
             </select>
             @error('category') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
+        @if ($product_id)
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select name="status" id="status" class="form-control @error('status') is-invalid @enderror" wire:model.lazy="status">
+                    <option>Pilih</option>
+                    <option value="1">Publish</option>
+                    <option value="0">Draft</option>
+                </select>
+                @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+        @endif
         <div class="form-group">
             <label for="description">Desctiption</label>
             <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" rows="5" wire:model.lazy="description"></textarea>
@@ -31,7 +46,7 @@
             @error('price') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
         <div class="form-group">
-            <label class="image">image</label>
+            <label class="image">Image</label>
                 <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" id="image" wire:model.lazy='image'>
                 @error('image') <span class="text-danger">{{ $message }}</span> @enderror
                 <div wire:loading wire:target="image"><span class="spinner-border spinner-border-sm"></span> Uploading...</div>
@@ -58,4 +73,6 @@
            @endif
         </div>
     </div>
+
+    @endif
 </div>
