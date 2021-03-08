@@ -7,7 +7,9 @@ use App\Models\User;
 use App\Http\Livewire\Admin\Category\Category;
 use App\Http\Livewire\Admin\Product\ListProduct;
 use Illuminate\Support\Facades\Storage;
-
+use App\Http\Livewire\Client\Index as HomeClient;
+use App\Http\Livewire\Client\Product\Detail;
+use App\Http\Livewire\Client\Product\Shop;
 
 
 /*
@@ -21,9 +23,13 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::name('client.')->group(function () {
+    Route::get('/', HomeClient::class)->name('home');
+    Route::get('/product/{slug}', Detail::class);
+    Route::get('shop', Shop::class)->name('shop');
 });
+
 
 
 
@@ -33,13 +39,10 @@ Route::prefix('auth')->group(function () {
 
 Route::prefix('admin')->group(function () {
     Route::middleware(['auth'])->group(function () {
-        Route::name('admin.')->group(function() {
+        Route::name('admin.')->group(function () {
             Route::get('/', Home::class)->name('home');
             Route::get('category', Category::class)->name('category');
             Route::get('product', ListProduct::class)->name('product');
         });
     });
 });
-
-
-
