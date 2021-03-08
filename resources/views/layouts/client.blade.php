@@ -6,10 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Blanja - @yield('title')</title>
 
-    <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('assets/css/ruang-admin.min.css') }}" rel="stylesheet">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('client/assets/img/favicon.ico') }}">
 
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{{ asset('client/assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/slicknav.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/style.css') }}">
 
     @livewireStyles
     <script src="{{ asset('assets/js/livewire-turbolinks.js') }}" data-turbolinks-eval="false"></script>
@@ -19,16 +30,48 @@
 </head>
 <body>
 
+
+
     @yield('content')
 
 
 
     @livewireScripts
-    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-    <script src="{{ asset('assets/js/ruang-admin.min.js') }}"></script>
-    @include('sweetalert::alert')
+
+
+    <script src="{{ asset('client/assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="{{ asset('client/assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
+    <script src="{{ asset('client/assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('client/assets/js/bootstrap.min.js') }}"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="{{ asset('client/assets/js/jquery.slicknav.min.js') }}"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="{{ asset('client/assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('client/assets/js/slick.min.js') }}"></script>
+
+    <!-- One Page, Animated-HeadLin -->
+    <script src="{{ asset('client/assets/js/wow.min.js') }}"></script>
+    <script src="{{ asset('client/assets/js/animated.headline.js') }}"></script>
+    <script src="{{ asset('client/assets/js/jquery.magnific-popup.js') }}"></script>
+
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="{{ asset('client/assets/js/jquery.scrollUp.min.js') }}"></script>
+    <script src="{{ asset('client/assets/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('client/assets/js/jquery.sticky.js') }}"></script>
+
+    <!-- contact js -->
+    <script src="{{ asset('client/assets/js/contact.js') }}"></script>
+    <script src="{{ asset('client/assets/js/jquery.form.js') }}"></script>
+    <script src="{{ asset('client/assets/js/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('client/assets/js/mail-script.js') }}"></script>
+    <script src="{{ asset('client/assets/js/jquery.ajaxchimp.min.js') }}"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="{{ asset('client/assets/js/plugins.js') }}"></script>
+    <script src="{{ asset('client/assets/js/main.js') }}"></script>
+
     <script src="{{ mix('js/app.js') }}" defer></script>
 
     <script>
@@ -40,5 +83,7 @@
             });
         });
     </script>
+
+    @yield('js')
 </body>
 </html>
