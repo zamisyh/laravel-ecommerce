@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\Cookie;
+use App\Facades\Cart;
 
 class Index extends Component
 {
@@ -21,27 +22,32 @@ class Index extends Component
     }
 
 
-    public function addToCart($product_id)
+    public function addToCart(int $id)
     {
-        $carts = json_decode($this->product_id->cookie('blanja-carts'), true); 
+        // $carts = json_decode($this->product_id->cookie('blanja-carts'), true);
 
-        if($carts && array_key_exists($this->product_id, $carts)){
-            $carts[$this->product_id]['qty'] += $this->qty;
-        }else{
-            $product = Product::where('id', $this->product_id);
+        // if($carts && array_key_exists($this->product_id, $carts)){
+        //     $carts[$this->product_id]['qty'] += $this->qty;
+        // }else{
+        //     $product = Product::where('id', $this->product_id);
 
-            $carts[$this->product_id] = [
-                'qty' => $this->qty,
-                'product_id' => $product->id,
-                'name' => $product->name,
-                'price' => $product->price,
-                'image' => $product->image,
-            ];
-        }
+        //     $carts[$this->product_id] = [
+        //         'qty' => $this->qty,
+        //         'product_id' => $product->id,
+        //         'name' => $product->name,
+        //         'price' => $product->price,
+        //         'image' => $product->image,
+        //     ];
+        // }
 
-        $cookie = cookie('blanja-carts', json_encode($carts), 2800);
+        // $cookie = cookie('blanja-carts', json_encode($carts), 2800);
 
-        return redirect()->back()->cookie($cookie);
+        // return redirect()->back()->cookie($cookie);
+
+        Cart::add(Product::where('id', $id)->first());
+        $this->emit('cartAdded');
+
+
     }
 
 
