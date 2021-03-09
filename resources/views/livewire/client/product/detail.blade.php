@@ -53,9 +53,9 @@
                            </tbody>
                        </table>
                     <div class="add_to_cart">
-                        <a href="#" class="btn_3">add to cart</a>
+                        <a wire:click='addToCart({{ $product->id }})' Class="btn_3">add to cart</a>
                     </div>
-                    
+
                     </div>
                 </div>
                 </div>
