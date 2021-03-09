@@ -91,7 +91,7 @@ class ListProduct extends Component
                 'category_id' => $this->category,
                 'description' => $this->description,
                 'weight' => $this->weight,
-                'price' => $this->price,
+                'price' => intval($this->price),
                 'slug' => strtolower(Str::slug($this->name)),
                 'image' => $nameFile
             ]);

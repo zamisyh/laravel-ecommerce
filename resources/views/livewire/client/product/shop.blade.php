@@ -57,8 +57,6 @@
                                         </select>
                                     @endif
 
-
-
                                 </div>
                             </nav>
                             <!--End Nav Button  -->
@@ -119,7 +117,7 @@
                                     @empty
 
                                     @if ($categoryModel && $search != null)
-                                        Data does not exist in the database
+                                       <span class="ml-3"> Data does not exist in the database</span>
                                     @endif
 
                                 @endforelse
