@@ -102,7 +102,7 @@
                                             <div class="popular-img">
                                                 <img src="{{ asset('storage/images/product/' . $item->image) }}" alt="">
                                                 <div class="img-cap">
-                                                    <span>Add to cart</span>
+                                                    <span wire:click='addToCart({{ $item->id }})'>Add to cart</span>
                                                 </div>
                                                 <div class="favorit-items">
                                                     <li class="badge badge-primary" style="list-style: none">{{ $item->category->category }}</li>
