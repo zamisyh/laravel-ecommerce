@@ -2,12 +2,32 @@
 
 namespace App\Http\Livewire\Client\Components;
 
+use App\Facades\Cart;
 use Livewire\Component;
 
 class Navbar extends Component
 {
+    public $cartTotal = 0;
+
+    protected $listeners = [
+        'cartAdded' => 'updateCartTotal',
+        'productRemoved' => 'updateCartTotal',
+        'clearCart' => 'updateCartTotal'
+    ];
+
+    public function mount()
+    {
+        $this->cartTotal = count(Cart::get()['products']);
+    }
+
     public function render()
     {
         return view('livewire.client.components.navbar');
+    }
+
+
+    public function updateCartTotal()
+    {
+        $this->cartTotal = count(Cart::get()['products']);
     }
 }
