@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Livewire\Client\Index as HomeClient;
 use App\Http\Livewire\Client\Product\Detail;
 use App\Http\Livewire\Client\Product\Shop;
+use App\Http\Livewire\Client\Product\Cart;
 
 
 /*
@@ -27,7 +28,8 @@ use App\Http\Livewire\Client\Product\Shop;
 Route::name('client.')->group(function () {
     Route::get('/', HomeClient::class)->name('home');
     Route::get('/product/{slug}', Detail::class);
-    Route::get('shop', Shop::class)->name('shop');
+    Route::get('cart', Cart::class)->name('cart');
+    Route::get('/product', Shop::class)->name('shop');
 });
 
 
