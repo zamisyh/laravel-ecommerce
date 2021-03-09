@@ -19,9 +19,9 @@
                             <img src="{{ asset('storage/images/product/' . $item->image) }}" alt="">
                             <div class="img-cap">
                                 <span wire:click="addToCart({{$item->id}})">Add to cart</span>
-                                <input type="hidden" wire:model="product_id" value="{{ $item->id }}">
-                                
-                                
+
+
+
                             </div>
                             <div class="favorit-items">
                                 <li class="badge badge-primary" style="list-style: none">{{ $item->category->category }}</li>
@@ -43,6 +43,10 @@
                 <div class="room-btn pt-70">
                     <a href="catagori.html" class="btn view-btn1">View More Products</a>
                 </div>
+
+
+
+
             </div>
         </div>
     </div>
