@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{ asset('client/assets/css/style.css') }}">
 
     @livewireStyles
+    @livewireScripts
     <script src="{{ asset('assets/js/livewire-turbolinks.js') }}" data-turbolinks-eval="false"></script>
 
 
@@ -36,7 +37,7 @@
 
 
 
-    @livewireScripts
+
 
 
     <script src="{{ asset('client/assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
