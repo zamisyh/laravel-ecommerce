@@ -15,11 +15,12 @@ class Shop extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $filter, $searchBox, $categoryBox;
+    public $searchBox, $categoryBox;
     public $search, $categoryModel;
     public $filterBtn;
     public $title;
-
+    public $pagesize = 6;
+    public $filter;
 
 
     public function render()
@@ -28,35 +29,35 @@ class Shop extends Component
         $category = null;
 
         if ($this->filter == 1) {
-            $products = Product::where('status', '1')->with('category')->orderBy('created_at', 'DESC')->get();
+            $products = Product::where('status', '1')->with('category')->orderBy('created_at', 'DESC')->paginate(intval($this->pagesize));
             $this->title = 'New Product';
             $this->clearAll();
         } elseif ($this->filter == 2) {
-            $products = Product::where('status', '1')->with('category')->orderBy('price', 'DESC')->get();
+            $products = Product::where('status', '1')->with('category')->orderBy('price', 'DESC')->paginate(intval($this->pagesize));
             $this->title = 'Product Price To High';
             $this->clearAll();
         } elseif ($this->filter == 3) {
-            $products = Product::where('status', '1')->with('category')->orderBy('price', 'ASC')->get();
+            $products = Product::where('status', '1')->with('category')->orderBy('price', 'ASC')->paginate(intval($this->pagesize));
             $this->title = 'Product Price To Low';
             $this->clearAll();
         } elseif ($this->filter == 4) {
-            $products = Product::where('status', '1')->with('category')->orderBy('price', 'ASC')->get();
+            $products = Product::where('status', '1')->with('category')->orderBy('price', 'ASC')->paginate(intval($this->pagesize));
             $this->title = 'Most Popular';
             $this->clearAll();
         } elseif ($this->filter == 5) {
-            $products = Product::where('status', '1')->where('category_id', $this->categoryModel)->with('category')->orderBy('price', 'ASC')->get();
+            $products = Product::where('status', '1')->where('category_id', $this->categoryModel)->with('category')->orderBy('price', 'ASC')->paginate(intval($this->pagesize));
             $category = Category::orderByDesc('created_at')->get();
 
             $this->title = 'Category';
             $this->categoryBox = true;
             $this->clearSearch();
         } elseif ($this->filter == 6) {
-            $products = Product::where('name', 'LIKE', '%' . $this->search . '%')->where('status', '1')->with('category')->orderBy('price', 'ASC')->get();
+            $products = Product::where('name', 'LIKE', '%' . $this->search . '%')->where('status', '1')->with('category')->orderBy('price', 'ASC')->paginate(intval($this->pagesize));
             $this->title = 'Searching ' . $this->search;
             $this->searchBox = true;
             $this->clearCategory();
         } else {
-            $products = Product::where('status', '1')->with('category')->get();
+            $products = Product::where('status', '1')->with('category')->paginate(intval($this->pagesize));
         }
         return view('livewire.client.product.shop', compact('products', 'category'))->extends('layouts.client')->section('content');
     }

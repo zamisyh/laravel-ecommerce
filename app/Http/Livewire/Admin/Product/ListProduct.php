@@ -70,8 +70,8 @@ class ListProduct extends Component
             'name' => 'required|max:100',
             'category' => 'required',
             'description' => 'required',
-            'weight' => 'required|numeric',
-            'price' => 'required|numeric',
+            'weight' => 'required|integer',
+            'price' => 'required|integer',
             'image' => 'required|file|image|mimes:jpeg,jpg,png'
         ]);
 

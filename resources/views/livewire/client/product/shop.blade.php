@@ -23,32 +23,24 @@
                     <div class="row product-btn justify-content-between mb-40">
                         <div class="properties__button">
                             <!--Nav Button  -->
-                            <nav>                                                      
+                            <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    {{-- <a wire:click='newProduct' wire:model='newProductModel'class="nav-item nav-link" id="nav-home-tab" data-toggle="tab">Newest Arrivals</a>
-                                    <a wire:click='priceToLow' wire:model='priceToLowModel' class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"> Price high to low</a>
-                                    <a class="nav-item nav-link" id="" data-toggle="tab"> Most populer </a>
-                                   
-                                        
-                                       
 
-                                    <input type="text" placeholder="Search Products.."> --}}
-                                         
-                                  
                                     <div class="default-select" id="default-select">
                                         @if (!$filter)
                                         <button wire:click='filterBtn' class="genric-btn primary btn-sm ml-3"><i class="fas fa-search"></i> Filter</button>
                                         @else
                                             <select wire:model='filter' name='filter'>
+                                                <option value="default" selected="selected">Default sorting</option>
                                                 <option value="1">New Product</option>
                                                 <option value="2">Product Price To High</option>
                                                 <option value="3">Product Price To Low</option>
                                                 <option value="4">Most Popular</option>
                                                 <option value="5">Category</option>
                                                 <option value="6">Searching</option>
-                                            </select> 
+                                            </select>
                                         @endif
-                                    </div>     
+                                    </div>
 
                                     @if ($searchBox)
                                         <input type="text" wire:model="search" class="ml-3" placeholder="Search Product">
@@ -65,7 +57,7 @@
                                         </select>
                                     @endif
 
-                                   
+
 
                                 </div>
                             </nav>
@@ -77,12 +69,14 @@
                         <!-- Select items -->
                        @if ($filter)
                         <div class="select-this">
-                          
-                            <select id="select1">
-                                <option value="3">3 per page</option>
-                                <option value="4">4 per page</option>
-                                <option value="5">5 per page</option>
-                                
+
+                            <select id="select1" wire:model="pagesize">
+                                <option value="6" selected="selected">6 per page</option>
+                                <option value="12">12 per page</option>
+                                <option value="18">18 per page</option>
+                                <option value="24">24 per page</option>
+                                <option value="30">30 Per page</option>
+
                             </select>
                         </div>
                        @endif
@@ -90,7 +84,7 @@
 
                     <!-- Nav Card -->
                     <div class="tab-content" id="nav-tabContent">
-                       
+
                         <div>
                             <h3>{{ $title }}</h3>
                         </div>
@@ -133,7 +127,7 @@
                         </div>
                     </div>
 
-                  
+                    {{ $products->links() }}
 
                     <!-- End Nav Card -->
                 </div>
@@ -154,12 +148,12 @@
             {
               localStorage['firstLoad'] = true;
               window.location.reload();
-            }  
+            }
             else
               localStorage.removeItem('firstLoad');
           }
         })();
-        
+
         </script>
     @endsection
 
