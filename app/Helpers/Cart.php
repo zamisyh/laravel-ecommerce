@@ -8,8 +8,8 @@ class Cart
 {
     public function __construct()
     {
-        if($this->get === null){
-            $this->set($this->empty);
+        if($this->get() === null){
+            $this->set($this->empty());
         }
     }
 
@@ -35,5 +35,17 @@ class Cart
     public function set($cart)
     {
         session()->put('blanja-cart', $cart);
+    }
+
+    public function remove(int $productId)
+    {
+        $cart = $this->get();
+        array_splice($cart['products'], array_search($productId, array_column($cart['products'], 'id')),1);
+        $this->set($cart);
+    }
+
+    public function clear()
+    {
+        $this->set($this->empty());
     }
 }
