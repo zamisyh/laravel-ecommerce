@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithPagination;
+use App\Facades\Cart;
 
 class Shop extends Component
 {
@@ -80,5 +81,11 @@ class Shop extends Component
     public function clearCategory()
     {
         $this->categoryBox = false;
+    }
+
+    public function addToCart(int $id)
+    {
+        Cart::add(Product::where('id', $id)->first());
+        $this->emit('cartAdded');
     }
 }
