@@ -39,6 +39,20 @@ class Detail extends Component
     public function addToCart(int $id)
     {
         Cart::add(Product::where('id', $id)->first());
+
+        $this->alert('success', 'Product has been successfully added to cart!', [
+            'position' =>  'top-end',
+            'timer' =>  3000,
+            'toast' =>  true,
+            'text' =>  '',
+            'confirmButtonText' =>  'Ok',
+            'cancelButtonText' =>  'Cancel',
+            'showCancelButton' =>  false,
+            'showConfirmButton' =>  false,
+      ]);
+
+
+
         $this->emit('cartAdded');
     }
 

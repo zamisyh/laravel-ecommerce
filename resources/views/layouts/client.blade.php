@@ -75,15 +75,11 @@
 
     <script src="{{ mix('js/app.js') }}" defer></script>
 
-    <script>
-        window.addEventListener('swal:modal', event => {
-            swal({
-                title: event.detail.message,
-                text: event.detail.text,
-                icon: event.detail.type,
-            });
-        });
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10">
     </script>
+    ...
+    <x-livewire-alert::scripts />
+
 
     @yield('js')
 </body>
