@@ -41,11 +41,9 @@
             <!-- Button -->
             <div class="row justify-content-center">
                 <div class="room-btn pt-70">
-                    <a href="catagori.html" class="btn view-btn1">View More Products</a>
+                    <a wire:click='loadMore' wire:loading.remove class="btn view-btn1 text-white">View More Products</a>
+                    <a wire:loading wire:target='loadMore' class="btn view-btn1 text-white">Load Data..</a>
                 </div>
-
-
-
 
             </div>
         </div>
