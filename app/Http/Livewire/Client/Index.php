@@ -12,12 +12,13 @@ class Index extends Component
 {
 
     public $product_id;
+    public $amount = 6;
 
     public function render()
     {
         $product['product']['slider'] = Product::where('status','1')->orderBy('created_at', 'DESC')->limit(3)->get();
         $product['product']['newArrivals'] = Product::where('status','1')->orderBy('created_at', 'DESC')->limit(3)->get();
-        $product['product']['popularProduct'] = Product::where('status','1')->with('category')->orderBy('created_at', 'ASC')->get();
+        $product['product']['popularProduct'] = Product::where('status','1')->with('category')->orderBy('created_at', 'ASC')->take($this->amount)->get();
         return view('livewire.client.index', $product)->extends('layouts.client')->section('content');
     }
 
@@ -48,6 +49,11 @@ class Index extends Component
         $this->emit('cartAdded');
 
 
+    }
+
+    public function loadMore()
+    {
+        $this->amount += 3;
     }
 
 
