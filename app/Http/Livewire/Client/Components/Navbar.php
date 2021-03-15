@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire\Client\Components;
 
-use App\Facades\Cart;
+
+use Gloudemans\Shoppingcart\Facades\Cart as CartBlanja;
+
+
 use Livewire\Component;
 
 class Navbar extends Component
@@ -17,7 +20,7 @@ class Navbar extends Component
 
     public function mount()
     {
-        $this->cartTotal = count(Cart::get()['products']);
+        $this->cartTotal = count(CartBlanja::content());
     }
 
     public function render()
@@ -28,6 +31,7 @@ class Navbar extends Component
 
     public function updateCartTotal()
     {
-        $this->cartTotal = count(Cart::get()['products']);
+        $this->cartTotal = count(CartBlanja::content());
+
     }
 }
