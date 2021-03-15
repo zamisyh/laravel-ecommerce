@@ -2,14 +2,19 @@
 
 namespace App\Http\Livewire\Client\Product;
 use Livewire\Component;
-use App\Facades\Cart as CartDetail;
+use Gloudemans\Shoppingcart\Facades\Cart as CartBlanja;
 use App\Models\Product;
+
 
 class Cart extends Component
 {
 
+
+
     public $cart;
-    public $totalPrice, $subtotalPrice;
+    public $totalPrice;
+    public $countPrice;
+    public $qty;
 
 
     protected $listeners = [
@@ -17,22 +22,22 @@ class Cart extends Component
         'cancelled'
     ];
 
-    public function mount()
-    {
-        $this->cart = CartDetail::get();
-    }
+
+
 
     public function render()
     {
+
+        $this->cart = CartBlanja::content();
         return view('livewire.client.product.cart')->extends('layouts.client')->section('content');
     }
 
 
-    public function removeItem($productId)
+    public function removeItem($rowId)
     {
 
-        CartDetail::remove($productId);
-        $this->cart = CartDetail::get();
+        CartBlanja::remove($rowId);
+
 
         $this->alert('success', 'Product has been successfully deleted', [
             'position' =>  'top-end',
@@ -53,7 +58,7 @@ class Cart extends Component
     {
 
         $this->confirmCheckout();
-        $this->cart = CartDetail::get();
+
     }
 
     public function confirmCheckout()
@@ -73,14 +78,33 @@ class Cart extends Component
     public function confirmed()
     {
         $this->alert('success', 'Success, redirect to page confirmation');
-        CartDetail::clear();
+        CartBlanja::destroy();
         $this->emit('clearCart');
-        $this->cart = CartDetail::get();
+
     }
 
     public function cancelled()
     {
         $this->alert('info', 'Okeyyy, lets buy more products!');
-        $this->cart = CartDetail::get();
+
     }
+
+    public function increment($id)
+    {
+        $product = CartBlanja::get($id);
+        CartBlanja::update($id, $product->qty + 1);
+
+
+    }
+
+    public function decrement($id)
+    {
+        $product = CartBlanja::get($id);
+        $product->qty <= 1 ? $product->qty + 1 : CartBlanja::update($id, $product->qty - 1);
+
+
+    }
+
+
+
 }
