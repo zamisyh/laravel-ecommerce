@@ -69,7 +69,7 @@
 
                         <td></td>
                         <td></td>
-                        @if ($cart)
+                        @if (Cart::count() > 0)
                         <td>
                             <h5>Tax</h5><br>
                             <h5>Subtotal</h5><br>
@@ -89,7 +89,7 @@
                   <div class="checkout_btn_inner float-right">
 
                     <a class="btn_1" href="{{ route('client.shop') }}">Continue Shopping</a>
-                    @if ($cart)
+                    @if (Cart::count() > 0)
                         <a class="btn_1 checkout_btn_1" wire:click='checkout'>Proceed to checkout</a>
                     @endif
                   </div>
