@@ -22,7 +22,7 @@
             <div class="container">
               <div class="cart_inner">
                 <div class="table-responsive">
-                  <table class="table">
+                  <table class="table" id="tableData">
                     <thead>
                       <tr>
                         <th scope="col">Product</th>
@@ -33,7 +33,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @forelse ($cart['products'] as $item)
+                        @forelse ($cart as $item)
                         <tr>
                             <td>
                               <div class="media">
@@ -49,17 +49,17 @@
                               <span>Rp. {{ number_format($item->price) }}</span>
                             </td>
                             <td>
-                              <div class="product_count">
-                                  {{ $totalPrice }}
-                                  <input class="input-number" type="number" value="1" min="0" max="10">
-
-                              </div>
+                                <div class="product_count">
+                                    <span class="input-number-decrement" wire:click='decrement("{{ $item->rowId }}")'> <i class="ti-minus"></i></span>
+                                    <input class="input-number" type="text" value="{{ $item->qty }}" min="1" max="10">
+                                    <span class="input-number-increment" wire:click='increment("{{ $item->rowId }}")'> <i class="ti-plus"></i></span>
+                                </div>
                             </td>
                             <td>
-                              <h5>$720.00</h5>
+                              <span>Rp. {{ number_format($item->subtotal) }}</span>
                             </td>
                             <td>
-                                <button wire:click='removeItem({{ $item->id }})' class="genric-btn danger small"><i class="fas fa-trash-alt"></i></button>
+                                <button wire:click='removeItem("{{ $item->rowId }}")' class="genric-btn danger small"><i class="fas fa-trash-alt"></i></button>
                             </td>
                           </tr>
 
@@ -69,21 +69,27 @@
 
                         <td></td>
                         <td></td>
-                        @if ($cart['products'])
+                        @if ($cart)
                         <td>
-                            <h5>Subtotal</h5>
+                            <h5>Tax</h5><br>
+                            <h5>Subtotal</h5><br>
+                            <h5>Total</h5>
                           </td>
                           <td>
-                            <h5>$2160.00</h5>
+                            <h5>Rp. {{ Cart::tax() }}</h5><br>
+                            <h5>Rp. {{ Cart::subtotal() }}</h5><br>
+                            <h5>Rp. {{ Cart::total() }}</h5>
                           </td>
+
                         @endif
                       </tr>
 
                     </tbody>
                   </table>
                   <div class="checkout_btn_inner float-right">
+
                     <a class="btn_1" href="{{ route('client.shop') }}">Continue Shopping</a>
-                    @if ($cart['products'])
+                    @if ($cart)
                         <a class="btn_1 checkout_btn_1" wire:click='checkout'>Proceed to checkout</a>
                     @endif
                   </div>
@@ -96,6 +102,8 @@
             <x-client.shop-method />
         </main>
     <x-client.footer />
+
+
 
 
 </div>
