@@ -7,7 +7,8 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithPagination;
-use App\Facades\Cart;
+use Gloudemans\Shoppingcart\Facades\Cart as CartBlanja;
+
 
 class Shop extends Component
 {
@@ -85,7 +86,21 @@ class Shop extends Component
 
     public function addToCart(int $id)
     {
-        Cart::add(Product::where('id', $id)->first());
+        $product = Product::where('id', $id)->first();
+
+        CartBlanja::add([
+            'id' => $product->id,
+            'name' => $product->name,
+            'slug' => $product->slug,
+            'qty' => 1,
+            'price' => $product->price,
+            'weight' => $product->weight,
+            'description' => $product->description,
+            'image' => $product->image,
+            'status' => $product->status,
+            'category_id' => $product->category_id
+        ]);
+
         $this->alert('success', 'Product has been successfully added to cart!', [
             'position' =>  'top-end',
             'timer' =>  3000,

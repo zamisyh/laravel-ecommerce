@@ -5,7 +5,8 @@ namespace App\Http\Livewire\Client\Product;
 use Livewire\Component;
 use App\Models\Product;
 use App\Models\Category;
-use App\Facades\Cart;
+use Gloudemans\Shoppingcart\Facades\Cart as CartBlanja;
+
 
 class Detail extends Component
 {
@@ -38,7 +39,20 @@ class Detail extends Component
 
     public function addToCart(int $id)
     {
-        Cart::add(Product::where('id', $id)->first());
+        $product = Product::where('id', $id)->first();
+
+        CartBlanja::add([
+            'id' => $product->id,
+            'name' => $product->name,
+            'slug' => $product->slug,
+            'qty' => 1,
+            'price' => $product->price,
+            'weight' => $product->weight,
+            'description' => $product->description,
+            'image' => $product->image,
+            'status' => $product->status,
+            'category_id' => $product->category_id
+        ]);
 
         $this->alert('success', 'Product has been successfully added to cart!', [
             'position' =>  'top-end',
@@ -49,7 +63,7 @@ class Detail extends Component
             'cancelButtonText' =>  'Cancel',
             'showCancelButton' =>  false,
             'showConfirmButton' =>  false,
-      ]);
+        ]);
 
 
 
