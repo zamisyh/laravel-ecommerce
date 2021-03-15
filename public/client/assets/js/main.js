@@ -1,6 +1,6 @@
 (function ($)
   { "use strict"
-  
+
 /* 1. Proloder */
     $(window).on('load', function () {
       $('#preloader-active').delay(450).fadeOut('slow');
@@ -217,8 +217,8 @@
     new WOW().init();
 
 /* 11. Datepicker */
-    
-// 11. ---- Mailchimp js --------//  
+
+// 11. ---- Mailchimp js --------//
     function mailChimp() {
       $('#mc_embed_signup').find('form').ajaxChimp();
     }
@@ -412,16 +412,16 @@
           $('#search_input_box').slideUp(500);
         });
 
-        //------- Mailchimp js --------//  
+        //------- Mailchimp js --------//
         function mailChimp() {
           $('#mc_embed_signup').find('form').ajaxChimp();
         }
         mailChimp();
 
-        //------- makeTimer js --------//  
+        //------- makeTimer js --------//
         function makeTimer() {
 
-          //		var endTime = new Date("29 April 2018 9:56:00 GMT+01:00");	
+          //		var endTime = new Date("29 April 2018 9:56:00 GMT+01:00");
           var endTime = new Date("27 Sep 2019 12:56:00 GMT+01:00");
           endTime = (Date.parse(endTime) / 1000);
           var now = new Date();
@@ -471,21 +471,21 @@
             els.dec.on('click', decrement);
             els.inc.on('click', increment);
 
-            function decrement() {
-              var value = el[0].value;
-              value--;
-              if(!min || value >= min) {
-                el[0].value = value;
-              }
-            }
+            // function decrement() {
+            //   var value = el[0].value;
+            //   value--;
+            //   if(!min || value >= min) {
+            //     el[0].value = value;
+            //   }
+            // }
 
-            function increment() {
-              var value = el[0].value;
-              value++;
-              if(!max || value <= max) {
-                el[0].value = value++;
-              }
-            }
+            // function increment() {
+            //   var value = el[0].value;
+            //   value++;
+            //   if(!max || value <= max) {
+            //     el[0].value = value++;
+            //   }
+            // }
           }
         }
       })();
@@ -494,7 +494,7 @@
         setInterval(function () {
           makeTimer();
         }, 1000);
-      
+
 
       $('.select_option_dropdown').hide();
       $(".select_option_list").click(function () {
@@ -510,7 +510,7 @@
 
       $('.controls').on('click', function(){
         $(this).addClass('active').siblings().removeClass('active');
-      }); 
+      });
 
 
 /* ----------------- Other Inner page End ------------------ */
@@ -527,7 +527,7 @@
           $('#search-input').val('');
       });
     });
-    
+
 // Grid view and list View
 
     $(document).ready(function() {
