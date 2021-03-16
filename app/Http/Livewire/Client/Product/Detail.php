@@ -41,7 +41,7 @@ class Detail extends Component
     {
         $product = Product::where('id', $id)->first();
 
-        CartBlanja::add([
+        $data = [
             'id' => $product->id,
             'name' => $product->name,
             'slug' => $product->slug,
@@ -52,7 +52,11 @@ class Detail extends Component
             'image' => $product->image,
             'status' => $product->status,
             'category_id' => $product->category_id
-        ]);
+        ];
+
+        CartBlanja::add($data)->associate('products');
+        // CartBlanja::instance('checkout')->add($data)->associate('products');
+
 
         $this->alert('success', 'Product has been successfully added to cart!', [
             'position' =>  'top-end',

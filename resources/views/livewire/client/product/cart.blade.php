@@ -18,6 +18,15 @@
             </div>
         </div>
 
+        @if ($redirectCheckout)
+            <script>
+                var url = "{{ route('client.checkout') }}";
+                setTimeout(function(){
+                    window.location = url;
+                },2000);
+            </script>
+        @endif
+
         <section class="cart_area section_padding">
             <div class="container">
               <div class="cart_inner">
@@ -90,7 +99,14 @@
 
                     <a class="btn_1" href="{{ route('client.shop') }}">Continue Shopping</a>
                     @if (Cart::count() > 0)
-                        <a class="btn_1 checkout_btn_1" wire:click='checkout'>Proceed to checkout</a>
+
+                        @if ($redirectCheckout)
+                            <a class="btn_1 checkout_btn_1" ><span class="spinner-border spinner-border-sm"></span> Loading..</a>
+                        @else
+                            <a class="btn_1 checkout_btn_1" wire:click='checkout'>Proceed to checkout</a>
+                        @endif
+
+
                     @endif
                   </div>
                 </div>

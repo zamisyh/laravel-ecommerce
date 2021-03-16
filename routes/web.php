@@ -11,6 +11,7 @@ use App\Http\Livewire\Client\Index as HomeClient;
 use App\Http\Livewire\Client\Product\Detail;
 use App\Http\Livewire\Client\Product\Shop;
 use App\Http\Livewire\Client\Product\Cart;
+use App\Http\Livewire\Client\Product\Checkout;
 
 
 /*
@@ -30,6 +31,7 @@ Route::name('client.')->group(function () {
     Route::get('/product/{slug}', Detail::class);
     Route::get('cart', Cart::class)->name('cart');
     Route::get('/product', Shop::class)->name('shop');
+    Route::get('checkout', Checkout::class)->name('checkout');
 });
 
 

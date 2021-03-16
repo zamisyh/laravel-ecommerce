@@ -15,6 +15,8 @@ class Cart extends Component
     public $totalPrice;
     public $countPrice;
     public $qty;
+    public $redirectCheckout = 0;
+    public $productId;
 
 
     protected $listeners = [
@@ -23,11 +25,8 @@ class Cart extends Component
     ];
 
 
-
-
     public function render()
     {
-
         $this->cart = CartBlanja::content();
         return view('livewire.client.product.cart')->extends('layouts.client')->section('content');
     }
@@ -36,28 +35,16 @@ class Cart extends Component
     public function removeItem($rowId)
     {
 
-        CartBlanja::remove($rowId);
 
-
-        $this->alert('success', 'Product has been successfully deleted', [
-            'position' =>  'top-end',
-            'timer' =>  3000,
-            'toast' =>  true,
-            'text' =>  '',
-            'confirmButtonText' =>  'Ok',
-            'cancelButtonText' =>  'Cancel',
-            'showCancelButton' =>  false,
-            'showConfirmButton' =>  false,
-      ]);
-
-
+        $this->productId = $rowId;
+        $this->confirmCheckout();
         $this->emit('productRemoved');
     }
 
     public function checkout()
     {
 
-        $this->confirmCheckout();
+        $this->redirectCheckout = true;
 
     }
 
@@ -77,8 +64,8 @@ class Cart extends Component
 
     public function confirmed()
     {
-        $this->alert('success', 'Success, redirect to page confirmation');
-        CartBlanja::destroy();
+        $this->alert('success', 'Success deleting products');
+        CartBlanja::remove($this->productId);
         $this->emit('clearCart');
 
     }
@@ -95,12 +82,14 @@ class Cart extends Component
         CartBlanja::update($id, $product->qty + 1);
 
 
+
     }
 
     public function decrement($id)
     {
         $product = CartBlanja::get($id);
         $product->qty <= 1 ? $product->qty + 1 : CartBlanja::update($id, $product->qty - 1);
+
 
 
     }
