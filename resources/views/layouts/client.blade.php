@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="{{ asset('client/assets/css/fontawesome-all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/themify-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/slick.css') }}">
-    <link rel="stylesheet" href="{{ asset('client/assets/css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/style.css') }}">
 
     @livewireStyles
@@ -59,15 +58,9 @@
 
     <!-- Scrollup, nice-select, sticky -->
     <script src="{{ asset('client/assets/js/jquery.scrollUp.min.js') }}"></script>
-    <script src="{{ asset('client/assets/js/jquery.nice-select.min.js') }}"></script>
+   
     <script src="{{ asset('client/assets/js/jquery.sticky.js') }}"></script>
 
-    <!-- contact js -->
-    <script src="{{ asset('client/assets/js/contact.js') }}"></script>
-    <script src="{{ asset('client/assets/js/jquery.form.js') }}"></script>
-    <script src="{{ asset('client/assets/js/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('client/assets/js/mail-script.js') }}"></script>
-    <script src="{{ asset('client/assets/js/jquery.ajaxchimp.min.js') }}"></script>
 
     <!-- Jquery Plugins, main Jquery -->
     <script src="{{ asset('client/assets/js/plugins.js') }}"></script>
