@@ -12,7 +12,7 @@ use App\Http\Livewire\Client\Product\Detail;
 use App\Http\Livewire\Client\Product\Shop;
 use App\Http\Livewire\Client\Product\Cart;
 use App\Http\Livewire\Client\Product\Checkout;
-
+use App\Http\Livewire\Client\Tes;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +32,7 @@ Route::name('client.')->group(function () {
     Route::get('cart', Cart::class)->name('cart');
     Route::get('/product', Shop::class)->name('shop');
     Route::get('checkout', Checkout::class)->name('checkout');
+    Route::get('tes', Tes::class);
 });
 
 
