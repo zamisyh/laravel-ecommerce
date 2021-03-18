@@ -26,7 +26,7 @@
 
         <section class="checkout_area section_padding">
             <div class="container">
-              <div class="cupon_area">
+              {{-- <div class="cupon_area">
                 <div class="check_title">
                   <h2>
                     Have a coupon?
@@ -35,32 +35,87 @@
                 </div>
                 <input type="text" placeholder="Enter coupon code" />
                 <a class="tp_btn" href="#">Apply Coupon</a>
-              </div>
+              </div> --}}
               <div class="billing_details">
                 <div class="row">
                   <div class="col-lg-8">
                     <h3>Billing Details</h3>
-                    {{-- <form class="row contact_form" action="#" method="post" novalidate="novalidate"> --}}
+                    
                       <div class="col-md-12 form-group p_star">
-                        <input type="text" class="form-control" id="first" name="name" />
+                        <input type="text" wire:model='name' class="form-control @error('name') is-invalid @enderror " value="{{ old('name') }}"/>
                         <span class="placeholder" data-placeholder="Name"></span>
+                        @error('name') <span class="error text-danger">{{ $message }}</span> @enderror
                       </div>
                       <div class="col-md-12 form-group p_star">
-                        <input type="text" class="form-control" id="email" name="email" />
+                        <input type="text" wire:model='email' class="form-control @error('email') is-invalid @enderror " value="{{ old('email') }}" />
                         <span class="placeholder" data-placeholder="Email Address"></span>
+                        @error('email') <span class="error text-danger">{{ $message }}</span> @enderror
                       </div>
                       <div class="col-md-12 form-group p_star">
-                        <input type="text" class="form-control" id="address" name="address" />
+                        <input type="text" wire:model='address' class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}" />
                         <span class="placeholder" data-placeholder="Address"></span>
+                        @error('address') <span class="error text-danger">{{ $message }}</span> @enderror
                       </div>
 
-                      @livewire('client.components.dropdowns')
+                      {{-- @livewire('client.components.dropdowns') --}}
+                      <div class="col-md-12 form-group p_star">
+
+                        <select wire:model='selectedCountry' class="form-control">
+                            <option value="" selected>Choose a Country</option>
+                            @foreach ($countries as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                        
+                        <br>
+                    
+                        @if (!is_null($cities))
+                            <select wire:model='selectedCity' class="form-control">
+                                <option value="" selected>Choose a City</option>
+                                @foreach ($cities as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        @endif
+                    
+                        <br>
+                    
+                        @if (!is_null($district))
+                            <select wire:model='selectedDistrict' class="form-control">
+                                <option value="" selected>Choose a District</option>
+                                @foreach ($district as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        @endif
+                    
+                        <br>
+                    
+                        @if (!is_null($village))
+                            <select wire:model='selectedVillage' class="form-control">
+                                <option value="" selected>Choose a Village</option>
+                                @foreach ($village as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        @endif
+                      
+                       
+                    </div>
+                    
 
                       <div class="col-md-12 form-group">
-                        <textarea class="form-control" name="message" id="message" rows="3"
+                        <textarea class="form-control @error('notes') is-invalid @enderror" wire:model='notes'
                           placeholder="Order Notes"></textarea>
+                          @error('notes') <span class="error text-danger">{{ $message }}</span> @enderror
                       </div>
-                    {{-- </form> --}}
+
+                      <div class="form-group">
+                        <button class="btn btn-primary" wire:loading.remove wire:click='saveOrder'>Checkout</button>
+                        <button class="btn btn-primary" wire:loading wire:target='saveOrder'>Loading..</button>
+                        
+                      </div>
+                    
                   </div>
                   <div class="col-lg-4">
                     <div class="order_box">

@@ -13,54 +13,74 @@ class Checkout extends Component
 {
 
     public $cart;
-    // public $province, $districts, $regencies, $villages;
+    public $name, $email, $address, $notes;
 
-    // public $selecteddistricts = null;
-    // public $selectedRegencies = null;
-    // public $selectedVillages = null;
+    public $selectedCountry = null;
+    public $selectedCity = null;
+    public $selectedDistrict = null;
+    public $selectedVillage = null;
 
-    public $states;
-    public $cities;
-    public $selectedState = NULL;
+    public $cities = null;
+    public $district = null;
+    public $village = null;
 
 
-    public function mount()
-    {
-        $this->states = Province::all();
-        // $this->districts = collect();
-        $this->cities = collect();
-        // $this->villages = collect();
-    }
 
     public function render()
     {
 
         $this->cart = CartBlanja::content();
-        return view('livewire.client.product.checkout')->extends('layouts.client')->section('content');
+        return view('livewire.client.product.checkout')->with([
+            'countries' => Province::all()
+        ])->extends('layouts.client')->section('content');
     }
 
-    public function updatedSelectedState($state)
+
+    public function updated($saveOrder)
     {
-        if (!is_null($state)) {
-            $this->cities = Regency::where('regency_id', $state)->get();
-        }
+        $this->validateOnly($saveOrder, [
+            'name' => 'min:6|required|string',
+            'email' => 'required|email',
+            'address' => 'required',
+            'notes' => 'required',
+            'selectedCountry' => 'required',
+            'selectedDistrict' => 'required',
+            'selectedCity' => 'required',
+            'selectedVillage' => 'required'
+
+        ]);
+    }
+
+    public function updatedSelectedCountry($id)
+    {
+        $this->cities = Regency::where('province_id', $id)->get();
+    }
+
+    public function updatedSelectedCity($id)
+    {
+        $this->district = District::where('regency_id', $id)->get();
+    }
+
+    public function updatedSelectedDistrict($id)
+    {
+        $this->village = Village::where('district_id', $id)->get();
     }
 
 
-    // public function updatedSelecteddistricts($districts)
-    // {
-    //     if(!is_null($districts)){
-    //         $this->districts = District::where('regency_id', $districts)->get();
-    //     }
-    // }
-
-    // public function updatedSelectedVillages($villages)
-    // {
-    //     $this->villages = Village::where('district_id', $villages)->get();
-    // }
-
-
-
+    public function saveOrder()
+    {
+        $orderValidate = $this->validate([
+            'name' => 'min:6|required|string',
+            'email' => 'required|email',
+            'address' => 'required',
+            'notes' => 'required',
+            'selectedCountry' => 'required',
+            'selectedDistrict' => 'required',
+            'selectedCity' => 'required',
+            'selectedVillage' => 'required'
+        ]);
 
 
+        dd($orderValidate);
+    }
 }
