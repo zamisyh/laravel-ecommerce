@@ -18,7 +18,7 @@ use Illuminate\Notifications\Notifiable;
 /**
  * Regency Model.
  */
-class Regency extends Model
+class Regency extends Eloquent
 {
     use RegencyTrait, HasFactory, Notifiable;
     protected $connection = 'mongodb';
@@ -35,9 +35,9 @@ class Regency extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        'province_id'
-    ];
+    // protected $hidden = [
+    //     'province_id'
+    // ];
 
     /**
      * Regency belongs to Province.
