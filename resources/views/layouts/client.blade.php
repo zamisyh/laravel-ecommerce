@@ -10,6 +10,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('client/assets/img/favicon.ico') }}">
 
     <!-- CSS here -->
+
     <link rel="stylesheet" href="{{ asset('client/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/flaticon.css') }}">
@@ -20,6 +21,9 @@
     <link rel="stylesheet" href="{{ asset('client/assets/css/themify-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/style.css') }}">
+    @yield('css')
+
+
 
     @livewireStyles
     @livewireScripts
@@ -58,7 +62,7 @@
 
     <!-- Scrollup, nice-select, sticky -->
     <script src="{{ asset('client/assets/js/jquery.scrollUp.min.js') }}"></script>
-   
+
     <script src="{{ asset('client/assets/js/jquery.sticky.js') }}"></script>
 
 
