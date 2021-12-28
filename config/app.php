@@ -165,8 +165,6 @@ return [
         /*
          * Package Service Providers...
          */
-        Jenssegers\Mongodb\MongodbServiceProvider::class,
-        Jenssegers\Mongodb\MongodbQueueServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
